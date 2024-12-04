@@ -19,9 +19,35 @@
                                 <label for="kor" class="form-label">Tanulói kora:</label>
                                 <select name="kor" id="kor" class="form-select">
                                     @for ($i=14; $i<24; $i++)
-                                        <option value="{{$i}}">{{$i}} év</option>
+                                        <option value="{{$i}}" @if(old('kor' == $i)) selected @endif>{{$i}} év</option>
                                     @endfor
                                 </select>
+                            </div>
+                            <div class="py-2">
+                                <label for="lakhely" class="form-label">Tanuló lakhelye:</label>
+                                <input type="text" name="lakhely" id="lakhely" class="form-control" value="{{old('lakhely')}}">
+                                @error('lakhely')
+                                    <p class="text-danger">{{$message}}</p>
+                                @enderror
+                                <div class="py-2">
+                                    <p>Tanuló neve:</p>
+                                    <input type="radio" name="nem" id="nemn" class="form-check-input" value="n" @if(old('nem' == 'n')) checked @endif>
+                                    <label for="nemn" class="form-check-label">Nő</label>
+                                    <input type="radio" name="nem" id="nemf" class="form-check-input" value="f" @if(old('nem' == 'f')) checked @endif>
+                                    <label for="nemf" class="form-check-label">Férfi</label>
+                                    @error('nem')
+                                    <p class="text-danger">{{$message}}</p>
+                                    @enderror
+                                </div>
+                                <div class="py-2">
+                                    <label for="agazat" class="form-label">Tanuló ágazata:</label>
+                                    <select name="agazat" id="agazat" class="form-select">
+                                        @for ($i=0; $i<count($agazat); $i++)
+                                            <option value="{{$agazat[$i]}}" @if (old('agazat') == $agazat[$i]) selected @endif>{{$agazat[$i]}}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary" type="submit">Elküld</button>
                             </div>
                         </form>
                     </div>
